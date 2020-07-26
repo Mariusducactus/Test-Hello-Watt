@@ -45,6 +45,10 @@ a:hover svg {
     margin: 2rem;
 }
 
+p {
+    margin: 1%;
+}
+
 .text {
     line-height: 1;
     font-weight: 200;
@@ -105,29 +109,4 @@ a:hover svg {
     margin: 5% auto;
 }
 
-@media (min-width: 600px) {
-    .chartContainer{
-        width:570px;
-    }
-}
 
-@media (min-width: 1200px) {
-    .chartContainer{
-        width:1140px;
-    }
-}
-
-@media (min-width: 1800px) {
-    .chartContainer{
-        width:1710px;
-    }
-}
-
-.chartTitle {
-    margin: 2px auto;
-    text-align: center;
-    width: 100%;
-    display: inline-block;
-    color:#333;
-    font-size:18px;
-}

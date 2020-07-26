@@ -14,6 +14,8 @@ class ClientsListView(ListView):
         """
 
         queryset = Client.objects.all()
+        for client in queryset :
+            client.test_heating()
         context_object_name = "clients_list"
         template_name = "dashboard/clients_list.html"
 

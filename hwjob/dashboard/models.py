@@ -15,6 +15,17 @@ class MonthMixin(models.Model):
 
 class Client(models.Model):
     full_name = models.CharField("full name", max_length=50)
+    has_elec_heating = models.BooleanField("if the client has an eletric heating", default = False)
+
+    def test_heating(self): 
+        winter_consumption=0
+        summer_consumption=0
+        for i in [1 ,2, 3, 4, 11, 12]:
+            winter_consumption += Consumption.objects.get(year = 2019, month = i, client = self.pk).kwh_consumed
+        for j in [5, 6, 7, 8, 9, 10]: 
+            summer_consumption += Consumption.objects.get(year = 2019, month = j, client = self.pk).kwh_consumed
+        self.has_elec_heating = winter_consumption > 2*summer_consumption
+        self.save()
 
     def __str__(self):
         return f"Client {self.pk}"
