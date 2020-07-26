@@ -11,4 +11,9 @@ urlpatterns = [
         consumption_view,
         name="consumption_details",
     ),
+    path(
+        f"consumption/<int:client_id>/<int:year>",
+        consumption_view,
+        name="consumption_details_bis",
+    ),
 ]

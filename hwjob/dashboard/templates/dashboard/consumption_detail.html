@@ -1,0 +1,73 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "dashboard/css/dashboard.css" %}">
+{% endblock %}
+
+{% block body %}
+    <main class="main-container">
+        <header>
+            <p> <img class="logo" alt="Joole logo" src="{% static 'dashboard/img/joole.png' %}" /> </p>
+
+            <h1 class="main-title"> Dashboard</h1>
+
+        </header>
+
+
+        <section>
+            <p class="text"> Welcome to you <span class="bold">client n° {{client_id|safe}}</span>, here is your electricity consumption for the <span class="bold">year {{year|safe}}</span>: </p>
+
+            <div class="chartContainer">
+                <canvas id="line"></canvas>
+            </div>
+        </section>
+
+        <nav>
+             <p class="text">Consumption in: <a href="/consumption/{{client_id}}/2019">2019</a> <a href="/consumption/{{client_id}}/2018">2018</a> <a href="/consumption/{{client_id}}/2017">2017</a> <a href="/consumption/{{client_id}}/2016">2016</a> <a href="/consumption/{{client_id}}/2015">2015</a></p>
+        </nav>
+
+        <footer>
+            <p class="text"> <a href="/">Home page</a> </p>
+        </footer>
+    </main>
+{% endblock body %}
+
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script>
+        var config = {
+          type: 'line',
+          data: {
+            datasets: [{
+              data: {{ data|safe }},
+              backgroundColor: [
+                '#5a67d8'
+              ],
+              borderColor: [
+                '#434190'
+              ],
+              label: 'Electricity consumption (in kwh)'
+            }],
+            labels: {{ labels|safe }}
+          },
+          options: {
+                responsive: true,
+                
+                
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                
+            }
+        };
+
+        window.onload = function() {
+          var ctx = document.getElementById('line').getContext('2d');
+          window.myPie = new Chart(ctx, config);
+        };
+    </script>
+{% endblock %}
