@@ -11,6 +11,7 @@ urlpatterns = [
         consumption_view,
         name="consumption_details",
     ),
+    #Path to display a specific year
     path(
         f"consumption/<int:client_id>/<int:year>",
         consumption_view,

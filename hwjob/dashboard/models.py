@@ -15,8 +15,9 @@ class MonthMixin(models.Model):
 
 class Client(models.Model):
     full_name = models.CharField("full name", max_length=50)
-    has_elec_heating = models.BooleanField("if the client has an eletric heating", default = False)
+    has_elec_heating = models.BooleanField("If the client has an eletric heating", default = False)
 
+    """Method for comparing winter and summer consumption and modifying the has_elec_heating attribute"""
     def test_heating(self): 
         winter_consumption=0
         summer_consumption=0
